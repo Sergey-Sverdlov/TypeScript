@@ -4,26 +4,7 @@ import {IUser} from "./types/types";
 
 
 function App() {
-    const users: IUser[] = [{
-        id: 1,
-        name: "Serega",
-        email: '123@yandex.ru',
-        address: {
-            city: "Moscow",
-            street: "TUX",
-            zipcode: '123154'
-        }
-    },
-        {
-            id: 2,
-            name: "Ser",
-            email: '13@yex.ru',
-            address: {
-                city: "Mo",
-                street: "T",
-                zipcode: '123'
-            }
-        }]
+    const [users, setUsers] = React.useState<IUser[]>([])
     return (
         <div>
             <Card width={'200px'} height={'200px'} variant={CardVariant.outlined}
