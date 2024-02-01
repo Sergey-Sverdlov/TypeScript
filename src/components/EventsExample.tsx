@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {FC} from 'react';
+import {useRef} from "react/ts5.0";
 
 const EventsExample: FC = () => {
     const [value, setValue] = React.useState<string>('')
     const [isDrag, setIsDrag] = React.useState<boolean>(false)
+    const inputRef = React.useRef<HTMLInputElement | null>(null)
     const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setValue(e.target.value)
     }
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log(value)
+        setValue("Control")
+        console.log(inputRef.current?.value)
     }
     const dragHandler = (e: React.DragEvent<HTMLDivElement>) => {
         console.log("DRAG")
@@ -29,8 +32,9 @@ const EventsExample: FC = () => {
     }
     return (
         <div>
-            <input type="text" value={value} onChange={handleClick}/>
-            <button onClick={clickHandler}>вапвапвап</button>
+            <input type="text" value={value} onChange={handleClick} placeholder="Управляемый"/>
+            <input type="text"  ref={inputRef} placeholder="Неуправляемый"/>
+            <button onClick={clickHandler}>Кнопка</button>
             <div draggable style={{width: 200, height: 200, background: 'red'}} onDrag={dragHandler}></div>
             <div
                 onDragOver={dragWithPreventHandler}
